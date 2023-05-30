@@ -1,0 +1,28 @@
+/* Default theme */
+body {
+    background-color: #fff;
+  }
+  
+  /* Dark theme */
+  body.dark-theme {
+    background-color: #222;
+    color: #fff;
+  }
+  
+  /* Animation */
+  @keyframes changeTheme {
+    0% {
+      background-color: #fff;
+    }
+    50% {
+      background-color: #f5f5f5;
+    }
+    100% {
+      background-color: #fff;
+    }
+  }
+  
+  body.animating {
+    animation: changeTheme 2s infinite;
+  }
+  
