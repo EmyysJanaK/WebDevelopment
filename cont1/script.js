@@ -7,7 +7,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
     var email = document.getElementById('email').value;
     var message = document.getElementById('message').value;
   
-    // Prepare the form data to send to the server
+    // Prepare the form data to send to the server.
     var formData = new FormData();
     formData.append('name', name);
     formData.append('email', email);

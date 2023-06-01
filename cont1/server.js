@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'janaksenevirathne8@gmail.com',
-    pass: 'janak123$'
+    pass: 'user-password'
   }
 });
 
@@ -21,7 +21,7 @@ app.post('/send-email', (req, res) => {
   // Prepare the email message
   const mailOptions = {
     from: 'janaksenevirathne8@gmail.com',
-    to: 'recipient-email@example.com',
+    to: 'janaksenevirathne8@example.com',
     subject: 'New Message from Your Web Page',
     text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
   };
