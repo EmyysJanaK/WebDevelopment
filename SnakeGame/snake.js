@@ -1,4 +1,4 @@
-const gameBoard = document.getElementById("game-board");
+const gameBoard = document.getElementById("game-board"); // Import module.
 const gridSize = 20;
 const gameBoardSize = 400;
 const snakeSpeed = 200;
