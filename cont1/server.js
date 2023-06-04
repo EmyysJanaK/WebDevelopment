@@ -2,7 +2,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 
 const app = express();
-const port = 3000;
+const port = 8000;
 
 // Create a transporter using Gmail SMTP
 const transporter = nodemailer.createTransport({
