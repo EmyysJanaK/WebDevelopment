@@ -1,4 +1,5 @@
 // Handle form submission
+
 document.querySelector('form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from submitting
   
@@ -12,6 +13,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
     formData.append('name', name);
     formData.append('email', email);
     formData.append('message', message);
+    formData.append('csrfmiddlewaretoken', document.querySelector('input[name="csrfmiddlewaretoken"]').value);
   
     // Send the form data to the server
     fetch('/send-email', {
@@ -31,5 +33,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
       console.log('Error:', error);
       // Optionally display an error message to the user
     });
+    // Reset the form fields
+    document.querySelector('form').reset();
   });
   
