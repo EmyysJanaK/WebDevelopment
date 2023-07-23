@@ -12,6 +12,11 @@ const transporter = nodemailer.createTransport({
     pass: 'user-password'
   }
 });
+// Middleware to parse JSON and URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
 
 // Set up a route to handle the form submission
 app.post('/send-email', (req, res) => {
