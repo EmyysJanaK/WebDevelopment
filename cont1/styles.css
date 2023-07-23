@@ -1,4 +1,6 @@
 /* Reset some default browser styles */
+
+
 body, h1, h2, p, ul, li, form {
     margin: 0;
     padding: 0;
@@ -9,6 +11,14 @@ body, h1, h2, p, ul, li, form {
     background-color: #333333;
     color: #06a11a;
     padding: 20px;
+  }
+  header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  header p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
   }
   
   /* Style the navigation menu */
