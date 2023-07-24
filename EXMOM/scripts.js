@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
         content: "Add image gallery or individual images here",
       },
       {
+        title: "Videos",
+        content: "Add video gallery or individual videos here",
+      },
+      {
         title: "Location",
         content: "University of Moratuwa, Bandaranayake Mawatha, Moratuwa 10400",
       },
