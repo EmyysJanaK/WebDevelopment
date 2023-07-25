@@ -1,0 +1,116 @@
+/* CSS for frames */
+.frame {
+  border: 2px solid #f0f0f0;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* CSS for sections inside frames */
+.frame h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.frame p {
+  font-size: 18px;
+  color: #777;
+}
+
+/* About Us frame specific styles */
+.frame.about-us {
+  background-color: #ffcb05;
+  color: #333;
+}
+
+.frame.about-us h2 {
+  color: #333;
+  font-size: 32px;
+}
+
+.frame.about-us p {
+  color: #555;
+  font-size: 20px;
+}
+
+/* Our Services frame specific styles */
+.frame.our-services {
+  background-color: #00bcd4;
+  color: #fff;
+}
+
+.frame.our-services h2 {
+  color: #fff;
+  font-size: 32px;
+}
+
+.frame.our-services p {
+  color: #eee;
+  font-size: 20px;
+}
+
+/* Pictures frame specific styles */
+.frame.pictures {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.frame.pictures h2 {
+  color: #333;
+  font-size: 32px;
+}
+
+.frame.pictures p {
+  color: #555;
+  font-size: 20px;
+}
+
+/* Location frame specific styles */
+.frame.location {
+  background-color: #e91e63;
+  color: #fff;
+}
+
+.frame.location h2 {
+  color: #fff;
+  font-size: 32px;
+}
+
+.frame.location p {
+  color: #eee;
+  font-size: 20px;
+}
+
+/* Contact Us Now frame specific styles */
+.frame.contact-us-now {
+  background-color: #8bc34a;
+  color: #333;
+}
+
+.frame.contact-us-now h2 {
+  color: #333;
+  font-size: 32px;
+}
+
+.frame.contact-us-now p {
+  color: #555;
+  font-size: 20px;
+}
+
+/* Made By frame specific styles */
+.frame.made-by {
+  background-color: #9c27b0;
+  color: #fff;
+}
+
+.frame.made-by h2 {
+  color: #fff;
+  font-size: 32px;
+}
+
+.frame.made-by p {
+  color: #eee;
+  font-size: 20px;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Symphony of Colors: Creating Mesmerizing Spirals with Python Turtle Graphics</title>
+    
+    <link rel="stylesheet" href="./prism (3).css">
+    <link rel="stylesheet" href="./styles(3).css">
+    
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <section class="top-nav">
+    <div>
+      Logo Here
+    </div>
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+    <div class='menu-button'></div>
+  </label>
+    <ul class="menu">
+      <!--add links-->
+      <li><a href="./SHM.html">An Artistic Exploration of Simple Harmonic Motion with Python Turtle</a></li>
+      <li><a href="./simulation.html">Exploring Colorful Patterns with Python's Turtle Graphics</a></li>
+      <li class="active"><a href="./spirals.html" >Mesmerizing Spirals: A Colorful Turtle Art Adventure</a></li>
+      <!--add active class to current page-->
+    </ul>
+  </section>
+  
+
+  
+<body>
+    <script>/<![CDATA[*/ / Codebox Script by Fineshop Design */ function copyC(e,t){var o=document.getElementById(e),n=document.getElementById(t),e=getSelection(),t=document.createRange();e.removeAllRanges(),t.selectNodeContents(n),e.addRange(t),document.execCommand("copy"),e.removeAllRanges(),o.classList.add("copied"),document.getElementById("toastNotif").innerHTML="<span>Copied to Clipboard!</span>",setTimeout(()=>{o.classList.remove("copied")},3e3)} /*]]>*/</script>
+    <div id="content" class="content-wrapper">
+      
+
+    <script src="./prism (3).js"></script>
+    <h1>Symphony of Colors: Creating Mesmerizing Spirals with Python Turtle Graphics</h1>
+    <div>
+    <h2 class="panel-sticky">Introduction:</h2>
+    <p> In this blog, we embark on an enchanting journey to generate intricate spirals, bursting with a myriad of colors. By leveraging the 'turtle' module and 'colorsys' library, we will craft a mesmerizing symphony of spirals that dance gracefully on a canvas of black.</div>
+
+    <!--[ Code Box ]-->
+      <div class='cBox'>
+        <div class='cBoxH'>
+          <!--[ Heading ]-->
+          <span>Code --&gt; python</span>
+          <!--[ Copy Button ]-->
+          <button id='copy3' class='cBoxB' onclick="copyC('copy3','code3')">
+            <i class='icn'></i>
+          </button>
+        </div>
+        <!--[ python-code ]-->
+<div id='code3'>
+<pre class="line-numbers">
+<code class="language-python">import turtle
+    import colorsys
+    t= turtle.Turtle()
+    s=turtle.Screen().bgcolor('black')
+    t.speed(0)
+    n=70
+    h=0
+    for i in range(360):
+        c=colorsys.hsv_to_rgb(h, 1, 0.8)
+        h+= 1/n
+        t.color(c)
+        t.left(1)
+        t.fd(1)
+        for j in range(2):
+            t.left(2)
+            t.circle(100)
+
+</code>
+</pre>
+</div>
+      </div>
+   <div>
+    <h2 class="panel-sticky">Code Overview:</h2>
+    <p>In this Python code, we use the turtle graphics library to create an enchanting animation of nested spirals on a black canvas. The spirals change colors smoothly as they rotate, creating a mesmerizing visual effect. The code employs the 'colorsys' module to generate vibrant colors in the HSV color space. The 'turtle' module provides the means to draw the spirals on the screen with precision and speed.</div>
+   <div>
+    <h2 class="panel-sticky">colorsys.hsv_to_rgb(h, 1, 0.8):</h2>
+    <p>This function takes a value 'h' representing the hue in the HSV color space, and fixed values of '1' for saturation and '0.8' for value (brightness).It returns the corresponding RGB color tuple based on the HSV input.</div>
+   <div>
+    <h2 class="panel-sticky">draw_spirals(n):</h2>
+    <p>This function draws nested spirals with the specified number of spirals, 'n'.It calculates and sets the color for each spiral using the 'colorsys.hsv_to_rgb' function.The 'turtle' is used to move forward and draw the spiral arcs in a circular pattern.</div>
+
+    <div>
+    <h2 class="panel-sticky">Main Loop:</h2>
+    <p>The main loop of the program executes 360 iterations, representing a complete circle. In each iteration, the code calculates a new color using the 'colorsys' function and updates the turtle's color. The turtle then rotates one degree to draw the next part of the spiral.</div>
+    <div>
+    <h2 class="panel-sticky">Pattern:</h2>
+    <p>The code creates a captivating pattern of nested spirals by repeating the main loop 360 times. With each iteration, the hue value 'h' is incremented by 1/n, where 'n' is a fixed value. This leads to a seamless transition through the color spectrum, making the spirals change colors gradually.The nested spirals are created using two nested loops. The turtle rotates two degrees and draws a circular arc with a radius of 100. This process is repeated twice to form the nested pattern.</div>
+    <div>
+    <h2 class="panel-sticky">Conclusion:</h2>
+    <p>This Python turtle program produces a visually striking animation of nested spirals on a black canvas. The smooth color transitions and symmetrical patterns result in a mesmerizing display of generative art. By creatively combining mathematics, color manipulation, and turtle graphics, this code showcases the beauty of art through code.</div>
+</div>
+<!--closes menu-bar-->
+<script>
+  const content=document.getElementById("content")
+  content.addEventListener("click", uncheck);
+  function uncheck() {
+  let input = document.getElementById('menu-toggle');
+  input.checked = false;
+
+}
+</script>
+</body>
+</html>

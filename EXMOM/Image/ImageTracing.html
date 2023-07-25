@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Generating fascinating visual patterns : Connecting points from an outline of an image</title>
+    
+    <link rel="stylesheet" href="./prism (2).css">
+    <link rel="stylesheet" href="./styles(2).css">
+    
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <section class="top-nav">
+    <div>
+      Logo Here
+    </div>
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+    <div class='menu-button'></div>
+  </label>
+    <ul class="menu">
+      <!--add links-->
+      <li><a href="./SHM.html">An Artistic Exploration of Simple Harmonic Motion with Python Turtle</a></li>
+      <li><a href="./simulation.html">Exploring Colorful Patterns with Python's Turtle Graphics</a></li>
+      <li class="active"><a href="./spirals.html" >Mesmerizing Spirals: A Colorful Turtle Art Adventure</a></li>
+      <!--add active class to current page-->
+    </ul>
+  </section>
+  
+
+  
+<body>
+    <script>/<![CDATA[*/ / Codebox Script by Fineshop Design */ function copyC(e,t){var o=document.getElementById(e),n=document.getElementById(t),e=getSelection(),t=document.createRange();e.removeAllRanges(),t.selectNodeContents(n),e.addRange(t),document.execCommand("copy"),e.removeAllRanges(),o.classList.add("copied"),document.getElementById("toastNotif").innerHTML="<span>Copied to Clipboard!</span>",setTimeout(()=>{o.classList.remove("copied")},3e3)} /*]]>*/</script>
+    <div id="content" class="content-wrapper">
+      
+
+    <script src="./prism (2).js"></script>
+    <h1>Generating Visual Patterns : Connecting points from an outline of an image</h1>
+    <div>
+    <h2 class="panel-sticky">Introduction:</h2>
+    <p>In this blog post, we will explore a captivating Python turtle program that creates drawing intricate spirals connecting points from an outline of an image. Utilizing the turtle graphics library and many more, the code elegantly combines mathematical patterns with artistic flair. Brace yourself for a visual treat as we unveil the beauty of generative art through spirals and vibrant hues.</p>
+    </div>
+
+    <!--[ Code Box ]-->
+      <div class='cBox'>
+        <div class='cBoxH'>
+          <!--[ Heading ]-->
+          <span>Code --&gt; python</span>
+          <!--[ Copy Button ]-->
+          <button id='copy3' class='cBoxB' onclick="copyC('copy3','code3')">
+            <i class='icn'></i>
+          </button>
+        </div>
+        <!--[ python-code ]-->
+<div id='code3'>
+<pre class="line-numbers">
+<code class="language-python">import cv2
+    import turtle
+    import numpy as np
+    from matplotlib import pyplot as plt
+    import time
+    turtle.tracer(0)
+    
+    def find_closest(p):
+        if len(positions) > 0:
+            nodes = np.array(positions)
+            distances = np.sum((nodes - p) ** 2, axis=1)
+            i_min = np.argmin(distances)
+            return positions[i_min]
+        else:
+            return None
+    
+    
+    def outline():
+        src_image = cv2.imread(image, 0)
+        blurred = cv2.GaussianBlur(src_image, (7, 7), 0)
+        th3 = cv2.adaptiveThreshold(blurred, maxValue=255, adaptiveMethod=cv2.ADAPTIVE_THRESH_GAUSSIAN_C,thresholdType=cv2.THRESH_BINARY, blockSize=9, C=2)
+        return th3
+    
+    image = "c:\\Users\\janak\\Desktop\\exmo1.jpg"
+    im = cv2.imread(image, 0)
+    th3 = outline()
+    
+    plt.imshow(th3)
+    plt.axis('off')
+    plt.tight_layout()
+    plt.show()
+    
+    WIDTH = im.shape[1]
+    HEIGHT = im.shape[0]
+    print(WIDTH, HEIGHT)
+    
+    CUTOFF_LEN = ((WIDTH + HEIGHT) / 2) / 60  # 60 threshold value
+    iH, iW = np.where(th3 == [0])
+    iW = iW - WIDTH / 2
+    iH = -1 * (iH - HEIGHT / 2)
+    positions = [list(iwh) for iwh in zip(iW, iH)]
+    
+    win = turtle.Screen()
+    win.bgcolor('black')
+    
+    t = turtle.Turtle()
+    t.color("brown")
+    t.shapesize(1)
+    t.pencolor("gray30")
+    
+    t.speed(0)
+    turtle.tracer(0, 0)
+    t.penup()
+    t.goto(positions[0])
+    t.pendown()
+    
+    time.sleep(3)
+    
+    p = positions[0]
+    while (p):
+        p = find_closest(p)
+        if p:
+            current_pos = np.asarray(t.pos())
+            new_pos = np.asarray(p)
+            length = np.linalg.norm(new_pos - current_pos)
+            if length < CUTOFF_LEN:
+                t.goto(p)
+                turtle.update()
+            else:
+                t.penup()
+                t.goto(p)
+                t.pendown()
+            positions.remove(p)
+        else:
+            p = None
+    
+    turtle.done()
+    time.sleep(3)
+    turtle.Screen().bye()
+
+</code>
+</pre>
+</div>
+      </div>
+   <div>
+    <h2 class="panel-sticky">Code Overview:</h2>
+    <p>The code begins by importing the necessary modules: 'turtle' for graphics and 'cv2' for image processing.'numpy' is used for numerical computations, and 'matplotlib' for displaying the thresholded image.</p>
+   </div>
+   <div>
+    <h2 class="panel-sticky">find_closest(p):</h2>
+    <p>This function takes a point 'p' as input and finds the closest point to it from a list of points called 'positions.' It uses numpy arrays to efficiently calculate the distances and returns the closest point. </div>
+    <div>
+    <h2 class="panel-sticky">outline( ):</h2>
+    <p>This function processes the input image and generates an outline of the image using OpenCV. It first reads the image, applies Gaussian blur, and then performs adaptive thresholding to create a binary image. The thresholded image is returned.<div>
+    <h2 class="panel-sticky">Main Loop:</h2>
+    <p>The main loop of the program starts after the outline of the image is obtained. It initializes the turtle and moves it to the first position on the canvas. It then enters a loop where it repeatedly finds the closest point to the current position and draws a spiral connecting the points. The drawing process continues until all points have been connected. </div> 
+    <div>
+    <h2 class="panel-sticky">Pattern:</h2>
+    <p>The program creates captivating visual patterns by connecting points from the image outline using spirals. Each spiral is drawn based on the distance between the current and closest point. If the distance is below a certain cutoff value, the turtle moves directly to the closest point and draws a straight line. Otherwise, it draws a spiral path to the next point. This process repeats, creating a mesmerizing pattern of connected spirals on the canvas.</div>
+    <div>
+    <h2 class="panel-sticky">Conclusion:</h2>
+    <p>We explored a Python program that uses the 'turtle' module to generate fascinating visual patterns by connecting points from an outline of an image. By combining OpenCV for image processing and the 'turtle' graphics library for drawing, the program creates intricate spirals that form beautiful and unique patterns. The patterns evolve as the turtle connects points in the image outline, resulting in a mesmerizing display of generative art.The program's creative potential is vast, and users can experiment with different images and parameters to create personalized spiral patterns. The combination of mathematics, art, and coding showcases the beauty of generative art and how code can be used to bring art to life.</div>
+</div>
+<!--closes menu-bar-->
+<script>
+  const content=document.getElementById("content")
+  content.addEventListener("click", uncheck);
+  function uncheck() {
+  let input = document.getElementById('menu-toggle');
+  input.checked = false;
+
+}
+</script>
+</body>
+</html>
