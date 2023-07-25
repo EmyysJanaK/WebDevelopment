@@ -18,6 +18,11 @@
   font-size: 18px;
   color: #777;
 }
+/* Home frame specific styles */
+.frame.home {
+  background-color: #4caf50;
+  color: #fff;
+}
 
 /* About Us frame specific styles */
 .frame.about-us {
