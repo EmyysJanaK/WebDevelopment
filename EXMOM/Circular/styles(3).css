@@ -20,6 +20,28 @@ p {
     margin-right:5%;
 }
 
+.panel {
+    background: #282828;
+    min-height: 40px;
+    color: #ac4ec4;
+    position: relative;
+    z-index:1;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    margin-bottom:0;
+    margin-top:0;
+    width:100%;
+    display: flex;
+    align-items: center;
+  }
+
+.panel > h2 {
+    margin: 0;
+    padding: 10px;
+    font-size: 1.5em;
+    color: #ac4ec4;
+    flex-grow: 1; }
+
 .panel-sticky {
     background:#282828;
     min-height: 40px;
