@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Colorful Spiral Art with Python Turtle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2, p, pre {
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Colorful Spiral Art with Python Turtle</h1>
+    <p>
+        Welcome to this mesmerizing Python Turtle adventure! In this web page, we'll introduce you to a Python program that creates a captivating and colorful spiral art using the Turtle graphics library. The spiral will gracefully change colors, and you'll be amazed by the beautiful patterns that emerge on your screen!
+    </p>
+    <h2>Python Code for Colorful Spiral Art</h2>
+    <p>
+        Below is the Python code that generates the colorful spiral art. The code utilizes the Turtle graphics library, which is an excellent tool for creating interactive graphics and visualizations.
+    </p>
+    <pre><code>
+from turtle import *
+from colorsys import *
+
+bgcolor('black')
+tracer(100)
+pensize(4)
+h = 0
+
+def draw(ang, n):
+    circle(5 + n, 69)
+    left(ang)
+    circle(5 + 2 * n, 60)
+
+goto(0, 0)
+
+for i in range(500):
+    c = hsv_to_rgb(h, 1, 1)
+    h += 0.005
+    color(c)
+    up()
+    draw(90, i)
+    draw(180, i)
+    down()
+    draw(1/2, i - i)
+    draw(180, i / 2)
+    draw(120, i - i)
+    </code></pre>
+
+    <h2>How the Code Works</h2>
+    <p>
+        The Python code above uses the Turtle graphics library to create the colorful spiral. Let's briefly explain the key parts of the code:
+    </p>
+    <ul>
+        <li><code>bgcolor('black')</code>: Sets the background color of the graphics window to black.</li>
+        <li><code>tracer(100)</code>: Speeds up the drawing process by updating the screen at every 100th step.</li>
+        <li><code>pensize(4)</code>: Sets the thickness of the drawing pen to 4 units.</li>
+        <li><code>h = 0</code>: Initializes the hue value for the colors used in the spiral.</li>
+        <li><code>draw(ang, n)</code>: A custom function that draws part of the spiral based on the given angle and distance.</li>
+        <li><code>circle(radius, extent)</code>: Draws a circle with the specified radius and extent (portion of the circle to draw).</li>
+        <li><code>hsv_to_rgb(h, 1, 1)</code>: Converts the hue value to an RGB color, producing vibrant colors for the spiral.</li>
+    </ul>
+
+    <h2>Running the Python Code</h2>
+    <p>
+        To see the colorful spiral art in action, save the Python code to a file with a .py extension, such as colorful_spiral.py. Open a terminal or command prompt, navigate to the folder containing the file, and execute the following command:
+    </p>
+    <pre><code>
+python colorful_spiral.py
+    </code></pre>
+
+    <h2>Behold the Colorful Spiral</h2>
+    <p>
+        As you run the Python program, the Turtle graphics window will pop up and start drawing the colorful spiral. Watch in awe as the spiral emerges, swirling and changing hues as it progresses. The combination of colors and the gradual change of direction create an enchanting visual experience.
+    </p>
+
+    <h2>Experiment and Customize</h2>
+    <p>
+        Feel free to experiment and customize the program! You can adjust the number of colors used in the spiral, the drawing speed, and the size and shape of the spiral. Change the values in the code and see how it affects the resulting spiral art!
+    </p>
+
+    <h2>Conclusion</h2>
+    <p>
+        With just a few lines of Python code and the power of Turtle graphics, you've created a captivating and colorful spiral art. It's a delightful way to explore the magic of colors and geometry while showcasing the creative potential of Python.
+    </p>
+    <p>
+        Now you have the tools to mesmerize yourself and others with beautiful spiral art. Go ahead, share your creations, and let the world experience the joy of Python Turtle!
+    </p>
+    <p>
+        Happy coding and enjoy the colorful journey!
+<br>
+Created by Haritha Mihimal.
+    </p>
+</body>
+</html>
+
+
+
+
