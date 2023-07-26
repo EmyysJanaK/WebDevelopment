@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Double Pendulum Simulation with Python Turtle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2, p, pre {
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Double Pendulum Simulation with Python Turtle</h1>
+    <p>
+        Welcome to this mesmerizing Python Turtle adventure! In this web page, we'll introduce you to a Python program that simulates how the double pendulum oscillates, using Turtle. In the double pendulum, there are 2 seperate pendulums connected each other at a smooth joint. Let's see how it is oscillating!
+    </p>
+    <h2>Python Code for the Double Pendulum Simulation</h2>
+    <p>
+        Below is the Python code that simulates the double pendulum oscillation. Here we have used several python in built modules called, Turtle, Numpy, Scipy, Math and Time.
+    </p>
+    <pre><code>
+
+import turtle
+from math import *
+import scipy.integrate as integrate
+import numpy as np
+import time
+
+win = turtle.Screen()
+win.title("Double pendulum simulation")
+win.setup(800,800)
+win.bgcolor('white')
+win.tracer(0)
+
+################## Change initial conditions
+L1 = 240
+L2 = 240
+theta1 = 100 
+theta2 = 80 
+G = 9.8
+M1 = 1
+M2 = 2
+omega1 = 0
+omega2 = 0
+##################
+
+p1 = turtle.Turtle()
+p1.shape('circle')
+p1.color('red')
+p1.up()
+p1.shapesize(1.5,1.5)
+
+p2 = turtle.Turtle()
+p2.shape('circle')
+p2.color('blue')
+p2.up()
+p2.shapesize(1.5,1.5)
+
+rod1 = turtle.Turtle()
+rod1.shape('circle')
+rod1.shapesize(0.1,0.1)
+rod1.pensize(3)
+rod1.up()
+
+
+rod2 = turtle.Turtle()
+rod2.shape('circle')
+rod2.shapesize(0.1,0.1)
+rod2.up()
+rod2.goto(p1.xcor(),p1.ycor())
+rod2.pensize(3)
+rod2.down()
+
+dt = 0.005
+t = np.arange(0.0,200,dt)
+            
+
+def derivs(state, t):
+
+    dydx = np.zeros_like(state)
+    dydx[0] = state[1]  #theta1(dot) = omega1
+
+    del_ = state[2] - state[0] # (theta2-theta1)
+    den1 = (M1 + M2)*L1 - M2*L1*cos(del_)*cos(del_)
+    dydx[1] = (M2*L1*state[1]*state[1]*sin(del_)*cos(del_) +  #omega1(dot)
+               M2*G*sin(state[2])*cos(del_) +
+               M2*L2*state[3]*state[3]*sin(del_) -
+               (M1 + M2)*G*sin(state[0]))/den1 
+
+    dydx[2] = state[3] #theta2(dot)
+
+    den2 = (L2/L1)*den1
+    dydx[3] = (-M2*L2*state[3]*state[3]*sin(del_)*cos(del_) +  #omega2(dot)
+               (M1 + M2)*G*sin(state[0])*cos(del_) -
+               (M1 + M2)*L1*state[1]*state[1]*sin(del_) -
+               (M1 + M2)*G*sin(state[2]))/den2
+    
+    return dydx
+
+state = np.radians([theta1,omega1,theta2,omega2])
+y = integrate.odeint(derivs,state,t)
+k = 1
+
+while k<40000:
+    x1 = L1*sin(y[k][0])
+    y1 = -L1*cos(y[k][0]) + 200 # to ceiling
+    x2 = x1 + L2*sin(y[k][2])
+    y2 = y1 -L2*cos(y[k][2])
+
+    p1.goto(x1,y1)
+    p2.goto(x2,y2)
+    
+    rod1.goto(p1.xcor(),p1.ycor())
+    rod2.goto(p2.xcor(),p2.ycor())
+    win.update()
+    rod1.clear()
+    rod2.clear()
+    rod1.up()
+    rod1.goto(0,200)
+    rod1.down()
+    rod2.up()
+    rod2.goto(p1.xcor(),p1.ycor())
+    rod2.down()
+    k += 1 # How quickly to run through array
+    
+turtle.bye()
+
+
+    
+
+      
+    </code></pre>
+
+    <h2>How the Code Works</h2>
+    <p>
+        The code starts by importing necessary modules and libraries: turtle, math, scipy.integrate, and numpy. These libraries are used for graphical visualization, mathematical calculations, and numerical integration.
+    </p>
+    <ul>
+        <li>The code sets up the turtle graphics window and initializes the parameters for the double pendulum simulation. </li>
+        <li> The parameters include the lengths of the two pendulum arms (L1 and L2), the initial angles of the two pendulums (theta1 and theta2), gravitational acceleration (G), masses of the two pendulums (M1 and M2), and initial angular velocities (omega1 and omega2).</li>
+      <li>Two turtles (p1 and p2) are created to represent the two masses at the end of the pendulum arms. These turtles will be used to visualize the positions of the masses.</li>
+      <li>Two turtles (rod1 and rod2) are created to represent the pendulum arms. These turtles will draw lines to represent the rods connecting the masses to the pivot point.</li>
+      <li>The code defines a small time step dt and creates an array of time points t using <code>numpy.arange</code> . This array will be used for numerical integration.</li>
+      <li>The function <code>derivs(state, t)</code> is defined to calculate the derivatives of the angles and angular velocities of the double pendulum at a given time t. This function is used in the numerical integration process.</li>
+      <li>The initial state of the double pendulum is set in radians, containing the initial angles and angular velocities of the two pendulums.</li>
+      <li>Numerical integration of the double pendulum's equations of motion is performed using <code>scipy.integrate.odeint</code> . This integration calculates the angles and angular velocities of the pendulum over time.</li>
+      <li>The <code>while</code> loop iterates through the simulation steps. It extracts the positions of the masses from the integration results and uses the turtle graphics library to update the positions of p1 and p2.</li>
+      <li>Inside the loop, the positions of the pendulum arms (rod1 and rod2) are also updated and drawn using the <code>goto</code> function of the turtles.</li>
+      <li>The <code>win.update()</code> function is called to update the graphics window after each iteration, creating a smooth animation of the double pendulum motion.</li>
+      <li>The <code>turtle.bye()</code> function is called at the end of the simulation to close the graphics window when the simulation is finished.</li>
+    </ul>
+      
+      <p>In summary, this code sets up a double pendulum simulation using turtle graphics and numerically integrates the equations of motion for the double pendulum to animate its motion. The double pendulum's movement is governed by its initial conditions, lengths of the pendulum arms, masses of the masses, and gravitational acceleration.</p>
+
+    <h2>Running the Python Code</h2>
+    <p>
+        To see the simulation of double pendulum oscillation, save the Python code to a file with a .py extension, such as <code>double_pendulum.py</code> . Open a terminal or command prompt, navigate to the folder containing the file, and execute the following command.
+    </p>
+      <p><i>Make sure you have turtle, numpy and scipy modules installed in your computer.</i></p>
+    <pre><code>
+python double_pendulum.py
+    </code></pre>
+
+    <h2>Behold the Simulation of Double Pendulum Oscillation</h2>
+    <p>
+        As you start running the Python program, the Turtle graphics window will pop up and start simulation. You can see an oscillating coupled pendulum. They move freely in a vertical plane. After a limited time period, it stops the simulation automatically,
+    </p>
+
+    <h2>Experiment and Customize</h2>
+    <p>
+        Feel free to experiment and customize the program! You can vay the rod lengths and oscillation speed of the pendulum, assigning various values to the parameters. </p>
+    <p>
+      And also, there is an exciting experiment you can do. You can vary the value of Gravitational Acceleration and observe how the pendulum would behave on other planets!
+    </p>
+
+    <h2>Conclusion</h2>
+    <p>
+        The double pendulum simulation visually demonstrates the complex and chaotic nature of the double pendulum system. As the simulation runs, we observe the two masses swinging and interacting with each other under the influence of gravity and their initial conditions.
+    </p>
+    <p>
+        The chaotic behavior of the double pendulum arises from its sensitivity to initial conditions. Even small differences in the starting angles or velocities can lead to vastly different trajectories over time. This sensitivity is known as the "butterfly effect," where tiny changes in the system's state can result in significant variations in the motion.
+    </p>
+      <p>The simulation helps illustrate how chaotic systems can be unpredictable and challenging to model accurately over extended periods. Despite its deterministic nature, the double pendulum's motion appears highly random and unpredictable, making long-term predictions practically impossible.</p>
+      <p>Overall, the double pendulum simulation provides a captivating visual representation of chaos theory and serves as a reminder of the intricate and unpredictable behavior that can arise in seemingly simple physical systems.</p>
+      <p>In summary, Python's powerful numerical capabilities, simplicity, and visualizing capabilities make it an ideal choice for simulating the double pendulum system. Its contributions make the simulation not only possible but also accessible, informative, and visually engaging for those seeking to explore and understand the behavior of chaotic systems.<p>
+    <p>
+        Happy coding and enjoy your Scientific journey and end up with a pleasing destination!
+<br>
+  <p>Created by Harith Maduranga.</p>
+    </p>
+</body>
+</html>
