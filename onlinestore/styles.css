@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    /* Add any desired styles for the container */
+}
+
+.frame {
+    width: 400px; /* Adjust this to your desired frame size */
+    height: 300px; /* Adjust this to your desired frame size */
+    background-color: #f0f0f0; /* Add any desired frame styles */
+}
+
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Start hidden */
+    /* Add any desired styles for the pop-up */
+}

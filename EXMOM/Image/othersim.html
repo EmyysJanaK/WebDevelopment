@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mesmerizing Spirals: A Colorful Turtle Art Adventure</title>
+    
+    <link rel="stylesheet" href="./prism(2).css">
+    <link rel="stylesheet" href="./styles(2).css">
+    
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <section class="top-nav">
+    <div>
+      Logo Here
+    </div>
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+    <div class='menu-button'></div>
+  </label>
+    <ul class="menu">
+      <!--add links-->
+      <li><a href="./SHM.html">An Artistic Exploration of Simple Harmonic Motion with Python Turtle</a></li>
+      <li><a href="./simulation.html">Exploring Colorful Patterns with Python's Turtle Graphics</a></li>
+      <li class="active"><a href="./spirals.html" >Mesmerizing Spirals: A Colorful Turtle Art Adventure</a></li>
+      <!--add active class to current page-->
+    </ul>
+  </section>
+  
+
+  
+<body>
+    <script>/<![CDATA[/ / Codebox Script by Fineshop Design */ function copyC(e,t){var o=document.getElementById(e),n=document.getElementById(t),e=getSelection(),t=document.createRange();e.removeAllRanges(),t.selectNodeContents(n),e.addRange(t),document.execCommand("copy"),e.removeAllRanges(),o.classList.add("copied"),document.getElementById("toastNotif").innerHTML="<span>Copied to Clipboard!</span>",setTimeout(()=>{o.classList.remove("copied")},3e3)} /]]>*/</script>
+    <div id="content" class="content-wrapper">
+      
+
+    <script src="./prism(2).js"></script>
+    <h1>Mesmerizing Spirals: A Colorful Turtle Art Adventure</h1>
+    <div>
+    <h2 class="panel-sticky">Introduction:</h2>
+    <p>
+In this blog post, we will explore a captivating Python turtle program that creates mesmerizing spirals with a burst of colors on a black background. Utilizing the turtle graphics library and the colorsys module, the code elegantly combines mathematical patterns with artistic flair. Brace yourself for a visual treat as we unveil the beauty of generative art through spirals and vibrant hues.
+</p>
+    </div>
+
+    <!--[ Code Box ]-->
+      <div class='cBox'>
+        <div class='cBoxH'>
+          <!--[ Heading ]-->
+          <span>Code --&gt; python</span>
+          <!--[ Copy Button ]-->
+          <button id='copy3' class='cBoxB' onclick="copyC('copy3','code3')">
+            <i class='icn'></i>
+          </button>
+        </div>
+        <!--[ python-code ]-->
+<div id='code3'>
+<pre class="line-numbers">
+<code class="language-python">
+import cv2
+import numpy as np
+import math
+
+def complexGrid(shape):
+    height, width = shape
+    originX = width // 2
+    originY = height // 2
+    grid = np.ndarray(shape, dtype = np.complex128)
+    for coords, _ in np.ndenumerate(grid):
+        y, x = coords
+        Y, X = -y + originY, -x + originX
+        grid[y][x] = Y*1j + X
+    return grid
+
+def f(z):
+    return z**2
+
+def transform(picture):
+    blank = np.ndarray(picture.shape, dtype = np.uint8)
+    height, width, _ = picture.shape
+    mapLocations = f(complexGrid((height, width)))
+    for coords, _ in np.ndenumerate(mapLocations):
+        yCoord, xCoord = coords
+        transformedCoords = mapLocations[yCoord][xCoord]
+        transformedX = np.real(transformedCoords)
+        transformedY = np.imag(transformedCoords)
+        resultantxCoord = int(transformedX // 500) + (width // 2) 
+        resultantyCoord = -int(transformedY // 500) + (height // 2)
+        if (0 <= resultantxCoord) and (resultantxCoord < width) and (0 <= resultantyCoord) and (resultantyCoord < height):
+            blank[resultantyCoord][resultantxCoord] = picture[yCoord][xCoord]
+    return blank
+
+camera = cv2.VideoCapture(0)
+key = 0
+while key != ord(' '):
+    ret, picture = camera.read()
+    transformedPic = transform(picture)
+    Y = picture.shape[0]
+    X = picture.shape[1]
+    picture[Y//2][X//2] = [255, 0, 0]
+    cv2.imshow("ORIGINAL FEED", picture)
+    cv2.imshow("TRANSFORMED FEED", transformedPic)
+    key = cv2.waitKey(1)
+cv2.destroyAllWindows()
+camera.release()
+</code>
+</pre>
+</div>
+      </div>
+   <div>
+    <h2 class="panel-sticky">Code Overview:</h2>
+    <p>
+	Our program works through the following main steps. First, it accesses a camera and obtains a live feed. Then, each pixel in the feed is associated with a complex number. Next, a transformation described by a complex function is applied to every pixel in this feed and the resulting image is displayed on screen. To understand how our program works, we must first understand how images are represented on computers as matrices of pixels. Each entry of such a matrix describes the color of a certain pixel of the picture; specifically, of the pixel of the image at the same location as the location of this entry in the matrix.
+</p>
+   </div>
+   <div>
+    <p>
+	The complexGrid function is used to associate each pixel in a given picture with a complex number. It does not require the actual picture we intend to do this with, and only requires the dimensions of the picture, and the position in the picture that we wish to treat as the origin. Given the dimensions of the picture, this function first generates an empty grid having the same dimensions, consisting of complex numbers. Then, it iterates through each entry in this grid, setting that entry equal to a certain complex number, determined in terms of its position in the grid. Here, (supposing that we want the origin to be at the top left corner of the picture) the entry at row r and column c in the grid is associated with the complex number c - ri. Once this is done, we return the grid for the rest of the program to make use of.
+    </p>
+   </div>
+    <div>
+    <p>
+	Next, we have a function which can take a matrix of complex numbers as input and produce as output a new matrix of complex numbers, each entry of which now equals to the complex number resulting from applying a given complex function to the complex number at the location of this entry in the input matrix. We will find ourselves having to refer to such a matrix later on in the program to actually change the positions of pixels in a feed.
+    </p>
+    </div> 
+    <div>
+    <p>
+	Finally, we have the transform function which combines both the above functions together and actually changes of the location of pixels of a given image/feed. This function requires the picture that we wish to apply this transformation to, and the position that we wish to treat as the origin as input. We start by creating an empty matrix of pixels, to represent an empty image. The dimensions of this matrix shall be the same as those of the picture passed in. We now create a complexGrid with these dimensions, and apply the complex function to the matrix returned, which will return another matrix. We then iterate through the entries of the input picture. Corresponding to each entry, there will be a complex number (as obtained from the matrix returned by f) that gives the position that the pixel at entry should map to. We access the corresponding entry in the matrix returned by f, and using its real and imaginary parts, identify a position in the empty image created above. Then, we replace the pixel at this position in empty image by the pixel in the input image at the corresponding location. Once we finish iterating through all entries, the blank image will have turned into the required image. We can now return it from our function.
+    </p>
+   </div>
+    <div>
+    <h2 class="panel-sticky">Conclusion:</h2>
+    <p>
+	Complex numbers are two-dimensional, consisting of both real and imaginary parts. Functions of complex numbers cannot therefore be visualized in three-dimensions, because such a visualization would have to be a four-dimensional object. Our program can help visualize complex-valued functions by treating the input feed from the camera as an input complex plane, and the generated output image as an output complex plane. Through real-time visualization, we can better see the behaviour of the function. For example, we can obtain an intuitive idea about how sensitive the function is to change at various input points, enabling us to predict what its derivative might be there. Further, we can study any discontinuities of the function. By allowing users to draw different curves on the input plane and studying their responses under complex functions, we believe our program can aid students in understanding important concepts in complex analysis.
+    </p>
+    </div>
+</div>
+<!--closes menu-bar-->
+<script>
+  const content=document.getElementById("content")
+  content.addEventListener("click", uncheck);
+  function uncheck() {
+  let input = document.getElementById('menu-toggle');
+  input.checked = false;
+
+}
+</script>
+
+<script>
+  function copyCodeToClipboard(codeElement) {
+    const codeText = codeElement.textContent.trim();
+    navigator.clipboard.writeText(codeText)
+      .then(() => {
+        // Code copied successfully, you can add any additional behavior here
+        console.log('Code copied to clipboard!');
+      })
+      .catch((error) => {
+        console.error('Failed to copy code to clipboard:', error);
+      });
+  }
+  
+  // Event listener for each "Copy" button
+  document.querySelectorAll('.cBoxB').forEach((button) => {
+    button.addEventListener('click', function() {
+      const codeElement = this.parentElement.nextElementSibling;
+      copyCodeToClipboard(codeElement);
+      this.innerText = 'Copied!';
+      const copyButton = this;
+      setTimeout(function() {
+        copyButton.innerText = 'Copy';
+      }, 1500); // Reset the button text after 1.5 seconds
+    });
+  });
+  </script>
+
+</body>
+</html>

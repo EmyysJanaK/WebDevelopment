@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Double Pendulum Simulation with Python Turtle</title>
+    
+    <link rel="stylesheet" href="./prism (4).css">
+    <link rel="stylesheet" href="./styles(4).css">
+    
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <section class="top-nav">
+    <div>
+      Logo Here
+    </div>
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+    <div class='menu-button'></div>
+  </label>
+    <ul class="menu">
+      <!--add links-->
+      <li><a href="./SHM.html">An Artistic Exploration of Simple Harmonic Motion with Python Turtle</a></li>
+      <li><a href="./simulation.html">Exploring Colorful Patterns with Python's Turtle Graphics</a></li>
+      <li class="active"><a href="./spirals.html" >Mesmerizing Spirals: A Colorful Turtle Art Adventure</a></li>
+      <!--add active class to current page-->
+    </ul>
+  </section>
+  
+
+  
+<body>
+    <script>/<![CDATA[*/ / Codebox Script by Fineshop Design */ function copyC(e,t){var o=document.getElementById(e),n=document.getElementById(t),e=getSelection(),t=document.createRange();e.removeAllRanges(),t.selectNodeContents(n),e.addRange(t),document.execCommand("copy"),e.removeAllRanges(),o.classList.add("copied"),document.getElementById("toastNotif").innerHTML="<span>Copied to Clipboard!</span>",setTimeout(()=>{o.classList.remove("copied")},3e3)} /*]]>*/</script>
+    <div id="content" class="content-wrapper">
+      
+
+    <script src="./prism (4).js"></script>
+    <h1>Double Pendulum Simulation with Python Turtle</h1>
+    <div>
+    <h2 class="panel-sticky">Introduction:</h2>
+    <p> Below is the Python code that simulates the double pendulum oscillation. Here we have used several python in built modules called, Turtle, Numpy, Scipy, Math and Time.
+    </div>
+
+    <!--[ Code Box ]-->
+      <div class='cBox'>
+        <div class='cBoxH'>
+          <!--[ Heading ]-->
+          <span>Code --&gt; python</span>
+          <!--[ Copy Button ]-->
+          <button id='copy3' class='cBoxB' onclick="copyC('copy3','code3')">
+            <i class='icn'></i>
+          </button>
+        </div>
+        <!--[ python-code ]-->
+<div id='code3'>
+<pre class="line-numbers">
+<code class="language-python">import turtle
+    from math import *
+    import scipy.integrate as integrate
+    import numpy as np
+    import time
+    
+    win = turtle.Screen()
+    win.title("Double pendulum simulation")
+    win.setup(800,800)
+    win.bgcolor('white')
+    win.tracer(0)
+    
+    ################## Change initial conditions
+    L1 = 240
+    L2 = 240
+    theta1 = 100 
+    theta2 = 80 
+    G = 9.8
+    M1 = 1
+    M2 = 2
+    omega1 = 0
+    omega2 = 0
+    ##################
+    
+    p1 = turtle.Turtle()
+    p1.shape('circle')
+    p1.color('red')
+    p1.up()
+    p1.shapesize(1.5,1.5)
+    
+    p2 = turtle.Turtle()
+    p2.shape('circle')
+    p2.color('blue')
+    p2.up()
+    p2.shapesize(1.5,1.5)
+    
+    rod1 = turtle.Turtle()
+    rod1.shape('circle')
+    rod1.shapesize(0.1,0.1)
+    rod1.pensize(3)
+    rod1.up()
+    
+    
+    rod2 = turtle.Turtle()
+    rod2.shape('circle')
+    rod2.shapesize(0.1,0.1)
+    rod2.up()
+    rod2.goto(p1.xcor(),p1.ycor())
+    rod2.pensize(3)
+    rod2.down()
+    
+    dt = 0.005
+    t = np.arange(0.0,200,dt)
+                
+    
+    def derivs(state, t):
+    
+        dydx = np.zeros_like(state)
+        dydx[0] = state[1]  #theta1(dot) = omega1
+    
+        del_ = state[2] - state[0] # (theta2-theta1)
+        den1 = (M1 + M2)*L1 - M2*L1*cos(del_)*cos(del_)
+        dydx[1] = (M2*L1*state[1]*state[1]*sin(del_)*cos(del_) +  #omega1(dot)
+                   M2*G*sin(state[2])*cos(del_) +
+                   M2*L2*state[3]*state[3]*sin(del_) -
+                   (M1 + M2)*G*sin(state[0]))/den1 
+    
+        dydx[2] = state[3] #theta2(dot)
+    
+        den2 = (L2/L1)*den1
+        dydx[3] = (-M2*L2*state[3]*state[3]*sin(del_)*cos(del_) +  #omega2(dot)
+                   (M1 + M2)*G*sin(state[0])*cos(del_) -
+                   (M1 + M2)*L1*state[1]*state[1]*sin(del_) -
+                   (M1 + M2)*G*sin(state[2]))/den2
+        
+        return dydx
+    
+    state = np.radians([theta1,omega1,theta2,omega2])
+    y = integrate.odeint(derivs,state,t)
+    k = 1
+    
+    while k<40000:
+        x1 = L1*sin(y[k][0])
+        y1 = -L1*cos(y[k][0]) + 200 # to ceiling
+        x2 = x1 + L2*sin(y[k][2])
+        y2 = y1 -L2*cos(y[k][2])
+    
+        p1.goto(x1,y1)
+        p2.goto(x2,y2)
+        
+        rod1.goto(p1.xcor(),p1.ycor())
+        rod2.goto(p2.xcor(),p2.ycor())
+        win.update()
+        rod1.clear()
+        rod2.clear()
+        rod1.up()
+        rod1.goto(0,200)
+        rod1.down()
+        rod2.up()
+        rod2.goto(p1.xcor(),p1.ycor())
+        rod2.down()
+        k += 1 # How quickly to run through array
+        
+    turtle.bye()
+</code>
+</pre>
+</div>
+      </div>
+   <div>
+    <h2 class="panel-sticky">Code Overview:</h2>
+    <p>This Python code is a simulation of a double pendulum using the Turtle graphics library. The double pendulum consists of two pendulums attached to each other. The motion of the double pendulum is determined by solving the equations of motion for the system. The code uses numerical integration (odeint from scipy) to calculate the angular positions and velocities of the two pendulums over time. The Turtle library is then used to visualize the motion of the pendulums on the screen.</div>
+   <div>
+    <h2 class="panel-sticky">derivs(state, t):</h2>
+    <p>This function calculates the derivatives of the angular positions and velocities of the two pendulums (theta1, theta2, omega1, omega2) with respect to time (t). It uses the given equations of motion for a double pendulum to calculate these derivatives.<div>
+    <h2 class="panel-sticky">While Loop:</h2>
+    <p>The while loop is the main animation loop of the simulation. It iterates through the array y, which contains the angular positions and velocities of the two pendulums over time. For each time step, it calculates the x and y coordinates of the two pendulums and updates their positions on the screen using the Turtle graphics library. The loop also updates the positions of the rods connecting the pendulums for visualization. The loop continues until k reaches 40000, effectively running through the entire array of pendulum states.<div>
+    <div>
+    <h2 class="panel-sticky">Conclusion:</h2>
+    <p>This code provides a visual simulation of a double pendulum system using numerical integration and the Turtle graphics library. The simulation shows how the double pendulum moves and behaves over time, demonstrating the complex and chaotic nature of such systems. This type of simulation is often used to study the behavior of dynamic systems and can be useful in educational contexts for illustrating concepts in physics and mathematics.</div>
+<!--closes menu-bar-->
+<script>
+  const content=document.getElementById("content")
+  content.addEventListener("click", uncheck);
+  function uncheck() {
+  let input = document.getElementById('menu-toggle');
+  input.checked = false;
+
+}
+</script>
+
+<script>
+function copyCodeToClipboard(codeElement) {
+  const codeText = codeElement.textContent.trim();
+  navigator.clipboard.writeText(codeText)
+    .then(() => {
+      // Code copied successfully, you can add any additional behavior here
+      console.log('Code copied to clipboard!');
+    })
+    .catch((error) => {
+      console.error('Failed to copy code to clipboard:', error);
+    });
+}
+
+// Event listener for each "Copy" button
+document.querySelectorAll('.cBoxB').forEach((button) => {
+  button.addEventListener('click', function() {
+    const codeElement = this.parentElement.nextElementSibling;
+    copyCodeToClipboard(codeElement);
+    this.innerText = 'Copied!';
+    const copyButton = this;
+    setTimeout(function() {
+      copyButton.innerText = 'Copy';
+    }, 1500); // Reset the button text after 1.5 seconds
+  });
+});
+</script>
+
+
+</body>
+</html>
