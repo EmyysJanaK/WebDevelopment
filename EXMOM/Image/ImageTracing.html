@@ -166,5 +166,34 @@
 
 }
 </script>
+
+<script>
+function copyCodeToClipboard(codeElement) {
+  const codeText = codeElement.textContent.trim();
+  navigator.clipboard.writeText(codeText)
+    .then(() => {
+      // Code copied successfully, you can add any additional behavior here
+      console.log('Code copied to clipboard!');
+    })
+    .catch((error) => {
+      console.error('Failed to copy code to clipboard:', error);
+    });
+}
+
+// Event listener for each "Copy" button
+document.querySelectorAll('.cBoxB').forEach((button) => {
+  button.addEventListener('click', function() {
+    const codeElement = this.parentElement.nextElementSibling;
+    copyCodeToClipboard(codeElement);
+    this.innerText = 'Copied!';
+    const copyButton = this;
+    setTimeout(function() {
+      copyButton.innerText = 'Copy';
+    }, 1500); // Reset the button text after 1.5 seconds
+  });
+});
+</script>
+
+
 </body>
 </html>

@@ -94,6 +94,7 @@
     <p>This Python turtle program produces a visually striking animation of nested spirals on a black canvas. The smooth color transitions and symmetrical patterns result in a mesmerizing display of generative art. By creatively combining mathematics, color manipulation, and turtle graphics, this code showcases the beauty of art through code.</div>
 </div>
 <!--closes menu-bar-->
+<script src="path/to/main.js"></script>
 <script>
   const content=document.getElementById("content")
   content.addEventListener("click", uncheck);
@@ -103,5 +104,35 @@
 
 }
 </script>
+
+<script>
+  // Function to copy the Python code to the clipboard
+  function copyCodeToClipboard(codeElement) {
+    const codeText = codeElement.textContent.trim();
+    navigator.clipboard.writeText(codeText)
+      .then(() => {
+        // Code copied successfully, you can add any additional behavior here
+        console.log('Code copied to clipboard!');
+      })
+      .catch((error) => {
+        console.error('Failed to copy code to clipboard:', error);
+      });
+  }
+
+  // Event listener for each "Copy" button
+  document.querySelectorAll('.cBoxB').forEach((button) => {
+    button.addEventListener('click', function() {
+      const codeElement = this.parentElement.nextElementSibling;
+      copyCodeToClipboard(codeElement);
+      this.innerText = 'Copied!';
+      const copyButton = this;
+      setTimeout(function() {
+        copyButton.innerText = 'Copy';
+      }, 1500); // Reset the button text after 1.5 seconds
+    });
+  });
+</script>
+
+
 </body>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Other meta tags and title -->
+  <link rel="stylesheet" href="path/to/prism.css">
+</head>
+<body>
+  <!-- Your content goes here -->
+
+  <pre class="language-python">
+    <code>
+        import turtle
+        import colorsys
+        t= turtle.Turtle()
+        s=turtle.Screen().bgcolor('black')
+        t.speed(0)
+        n=70
+        h=0
+        for i in range(360):
+            c=colorsys.hsv_to_rgb(h, 1, 0.8)
+            h+= 1/n
+            t.color(c)
+            t.left(1)
+            t.fd(1)
+            for j in range(2):
+                t.left(2)
+                t.circle(100)
+    </code>
+    <button class="copy-btn">Copy</button>
+  </pre>
+
+  <!-- Add Prism and Clipboard JS scripts -->
+  <script src="path/to/prism.js"></script>
+  <script src="path/to/prism-python.js"></script> <!-- Optional for Python syntax highlighting -->
+  <script src="path/to/clipboard.js"></script>
+  <script src="path/to/main.js"></script>
+</body>
+</html>
