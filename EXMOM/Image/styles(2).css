@@ -5,7 +5,12 @@ body {
 }
 
 
+
 h1 {
+    text-align: center;
+    color:#ac4ec4
+}
+h2 {
     text-align: center;
     color:#ac4ec4
 }
