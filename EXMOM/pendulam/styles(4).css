@@ -9,6 +9,11 @@ h1 {
     text-align: center;
     color:#ac4ec4
 }
+h2 {
+    text-align: center;
+    color:#ac4ec4;
+    margin-top: 20px;
+}
 
 p {
     line-height: 1.5;
