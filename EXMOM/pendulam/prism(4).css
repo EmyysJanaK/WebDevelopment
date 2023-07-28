@@ -22,6 +22,9 @@ pre[class*=language-] {
     -moz-hyphens: none;
     -ms-hyphens: none;
     hyphens: none;
+
+    background: 0 0;
+    text-shadow: 0 1px #fff;
 }
 
 /* Selection styles for code and pre elements */
