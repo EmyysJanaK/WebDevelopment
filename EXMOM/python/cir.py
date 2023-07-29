@@ -14,3 +14,5 @@ for i in range(360):
     for j in range(2):
         t.left(2)
         t.circle(100)
+turtle.hideturtle()
+turtle.done()
