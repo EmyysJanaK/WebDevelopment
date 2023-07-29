@@ -13,6 +13,8 @@ def draw(ang, n):
 
 goto(0, 0)
 
+up()
+
 for i in range(500):
     c = hsv_to_rgb(h, 1, 1)
     h += 0.005
