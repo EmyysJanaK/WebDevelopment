@@ -14,6 +14,14 @@ def find_closest(p):
     else:
         return None
 
+def find_closest_index(p):
+    if len(positions) > 0:
+        nodes = np.array(positions)
+        distances = np.sum((nodes - p) ** 2, axis=1)
+        i_min = np.argmin(distances)
+        return i_min
+    else:
+        return None
 
 def outline():
     src_image = cv2.imread(image, 0)
