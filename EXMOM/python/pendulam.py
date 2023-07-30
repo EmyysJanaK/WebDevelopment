@@ -27,6 +27,7 @@ p1.shape('circle')
 p1.color('red')
 p1.up()
 p1.shapesize(1.5,1.5)
+p1.goto(0,0)
 
 p2 = turtle.Turtle()
 p2.shape('circle')
