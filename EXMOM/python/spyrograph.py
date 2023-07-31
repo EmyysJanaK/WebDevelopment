@@ -12,6 +12,9 @@ def draw(ang, n):
     circle (5+n, 69)
     left (ang)
     circle (5+2*n, 60)
+up()
+def hsv_to_rgb(h, s, v):
+    return tuple(int(c * 255) for c in colorsys.hsv_to_rgb(h, s, v))
 
 goto (0,0)
 for i in range(500):
