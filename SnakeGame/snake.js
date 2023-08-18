@@ -25,7 +25,8 @@ function createFood() {
     foodElement.className = "food";
     foodElement.style.left = `${x}px`;
     foodElement.style.top = `${y}px`;
-
+    foodElement.style.width = `${gridSize}px`;
+    foodElement.style.height = `${gridSize}px`; 
     return { x, y, element: foodElement };
 }
 
@@ -40,6 +41,7 @@ function updateSnake() {
     } else {
         snake.pop();
     }
+    // Check for collisions with the food   
 }
 
 function renderSnake() {
