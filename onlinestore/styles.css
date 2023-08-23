@@ -7,6 +7,10 @@ body {
     position: relative;
     /* Add any desired styles for the container */
 }
+a {
+    text-decoration: none;
+    border-radius: 5px;
+}
 
 .frame {
     width: 400px; /* Adjust this to your desired frame size */
