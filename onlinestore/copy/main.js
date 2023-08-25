@@ -11,7 +11,8 @@ function copyCodeToClipboard(codeElement) {
   
     // Copy the selected text to the clipboard
     document.execCommand('copy');
-  
+    // Log a message to the console
+    console.log('Code copied to clipboard:', codeElement.innerText);    
     // Remove the selection
     selection.removeAllRanges();
   }
