@@ -7,6 +7,7 @@
       text-align: center;
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
       background-color: rgb(86, 155, 16);
+      color: white;
     }
   </style>
 </head>
@@ -30,6 +31,8 @@
         setMessage('Please enter a valid number between 1 and 100.');
         return;
       }
+      // Compare the guess with the random number
+      let message = '';
 
       if (guess === randomNumber) {
         setMessage('Congratulations! You guessed the correct number!');
